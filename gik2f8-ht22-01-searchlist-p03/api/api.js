@@ -4,6 +4,13 @@ async function getAll() {
   const result = await fetch(url)
     .then((result) => result.json())
     .catch((e) => e);
+  return result;
+}
 
+async function getBookById(id) {
+  newUrl = url + "/" + id;
+  const result = await fetch(newUrl)
+    .then((result) => result.json())
+    .catch((e) => e);
   return result;
 }
