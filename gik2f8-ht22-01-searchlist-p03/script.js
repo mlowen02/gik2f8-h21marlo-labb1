@@ -23,15 +23,20 @@ function showDetails(event){
     return event.target.innerHTML.includes(author)&&
             event.target.innerHTML.includes(title);
   });
-  getBookById(targetBook[0].id).then(returnedBook => {
-    const el = document.querySelector('#bookDetail');
-    if(el) el.parentElement.removeChild(el);
-    event.target.insertAdjacentHTML('beforeend',createDetailHTML(returnedBook));
-  });
+  if(targetBook.length > 0){
+    getBookById(targetBook[0].id).then(returnedBook => {
+      const el = document.querySelector('#bookDetail');
+      if(el) el.parentElement.removeChild(el);
+      event.target.insertAdjacentHTML('beforeend',createDetailHTML(returnedBook));
+    });
+  }
 }
 
 function removeDetails(){
-  document.querySelector('#bookDetail').remove();
+  const element = document.querySelector('#bookDetail');
+  if(element){
+    element.remove();
+  }
 }
 
 searchField.addEventListener('keyup', (e) =>
