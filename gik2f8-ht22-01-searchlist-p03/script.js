@@ -9,7 +9,8 @@ window.addEventListener('load', () => {
 function createDetailHTML(book){
   let html = `<div id="bookDetail"
                 style="border-radius:.5rem;border:.1rem solid black;width:20vw;background-color:rgba(100,100,100,.7);position:absolute;display:flex;flex-direction:row;color:white;">
-                <div>
+                <div style="display: flex; flex-direction: column; justify-content: space-between;">
+                <h1 style="margin: .5rem;">`+book.title+`</h1>
                 <p style="margin: 1rem;">`+"Pages: "+book.pages+`</p>
                 <p style="margin: 1rem">`+"Release date: "+ book.releaseDate +`</p>
                 </div>
@@ -25,18 +26,16 @@ function showDetails(event){
   });
   if(targetBook.length > 0){
     getBookById(targetBook[0].id).then(returnedBook => {
-      const el = document.querySelector('#bookDetail');
-      if(el) el.parentElement.removeChild(el);
+      const el = document.getElementById("bookDetail");
+      el && el.remove();
       event.target.insertAdjacentHTML('beforeend',createDetailHTML(returnedBook));
     });
   }
 }
 
 function removeDetails(){
-  const element = document.querySelector('#bookDetail');
-  if(element){
-    element.remove();
-  }
+  const el = document.getElementById("bookDetail");
+  el && el.remove();
 }
 
 searchField.addEventListener('keyup', (e) =>
@@ -53,7 +52,6 @@ searchField.addEventListener('keyup', (e) =>
 
 function renderBookList(bookList) {
   const existingElement = document.querySelector('.book-list');
-
   const root = document.getElementById('root');
 
   existingElement && root.removeChild(existingElement);
